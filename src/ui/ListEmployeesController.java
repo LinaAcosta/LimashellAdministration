@@ -15,6 +15,8 @@ import model.Employee;
 
 public class ListEmployeesController {
 	private Administration admi;
+	@FXML
+    private TextField salary;
 
     @FXML
     private Label sortEmployees;
@@ -129,6 +131,26 @@ public class ListEmployeesController {
     			infoEmployee.setText("The id does not exist");
     		}else {
     			infoEmployee.setText(admi.searchByID(Integer.parseInt(id.getText())).getMessage());
+    		}
+    	}
+    }
+    @FXML
+    void numberEmployees(ActionEvent event) throws IOException {
+    	admi = new Administration();
+    	admi.loadEmployees();
+    	double total = admi.numberEmployees(admi.getFirst());
+    	infoEmployee.setText("Number of employees: " + total);
+    }
+    @FXML
+    void searchSalary(ActionEvent event) throws NumberFormatException, IOException {
+    	admi = new Administration();
+    	if(salary.getText().isEmpty() == true) {
+    		infoEmployee.setText("Please enter the salary");
+    	}else {
+    		if(admi.searchSalary(Double.parseDouble(salary.getText())) == null) {
+    			infoEmployee.setText("The id does not exist");
+    		}else {
+    			infoEmployee.setText(admi.searchSalary(Double.parseDouble(salary.getText())).getMessage());
     		}
     	}
     }

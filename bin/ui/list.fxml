@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="389.0" prefWidth="725.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ListEmployeesController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ListEmployeesController">
    <top>
       <AnchorPane prefHeight="73.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -56,7 +56,7 @@
       </AnchorPane>
    </top>
    <center>
-      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <BorderPane prefHeight="377.0" prefWidth="725.0" BorderPane.alignment="CENTER">
          <top>
             <AnchorPane prefHeight="193.0" prefWidth="725.0" BorderPane.alignment="CENTER">
                <children>
@@ -67,14 +67,30 @@
          <bottom>
             <AnchorPane prefHeight="146.0" prefWidth="725.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="14.0" layoutY="2.0" prefHeight="25.0" prefWidth="170.0" text="Search Employee" textFill="#37aedd">
+                  <Label layoutX="14.0" layoutY="2.0" prefHeight="25.0" prefWidth="216.0" text="Search Employee by ID" textFill="#37aedd">
                      <font>
                         <Font name="Berlin Sans FB" size="22.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="id" layoutX="184.0" layoutY="2.0" />
-                  <Label fx:id="infoEmployee" layoutX="357.0" layoutY="2.0" prefHeight="136.0" prefWidth="207.0" />
-                  <Button layoutX="579.0" layoutY="-1.0" mnemonicParsing="false" onAction="#searchEmployee" text="Search">
+                  <TextField fx:id="id" layoutX="229.0" layoutY="2.0" />
+                  <Label fx:id="infoEmployee" layoutX="392.0" layoutY="2.0" prefHeight="136.0" prefWidth="207.0" />
+                  <Button layoutX="636.0" layoutY="-1.0" mnemonicParsing="false" onAction="#searchEmployee" text="Search ID">
+                     <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#numberEmployees" text="Count Number Employees">
+                     <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="14.0" layoutY="30.0" prefHeight="25.0" prefWidth="216.0" text="Search by Salary" textFill="#37aedd">
+                     <font>
+                        <Font name="Berlin Sans FB" size="22.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="salary" layoutX="229.0" layoutY="30.0" />
+                  <Button layoutX="609.0" layoutY="40.0" mnemonicParsing="false" onAction="#searchSalary" text="Search Salary">
                      <font>
                         <Font name="Berlin Sans FB" size="16.0" />
                      </font>

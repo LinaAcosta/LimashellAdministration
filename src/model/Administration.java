@@ -292,5 +292,38 @@ public class Administration{
 	    }
 		return em[pos];
 	}
+	public int numberEmployees(Employee e) {
+		if(e.getNext()== null) {
+			return 1;
+		}else {
+			return 1 + numberEmployees(e.getNext());
+		}
+	}
+	public Employee searchSalary(double salary) throws IOException {
+		loadEmployees();
+		int e = employees.size();
+		Employee[] em = new Employee[e];
+		for(int i = 0; i<em.length; i++) {
+			em[i] = employees.get(i);
+		}
+		boolean stop = false;
+		int pos = 0;
+    	int low = 0;
+    	int hight = em.length - 1;
+    	while(low <= hight && !stop) {
+    		int mid = (low+hight)/2;
+    		if(em[mid].getBaseSalary() == salary) {
+    			stop = true;
+    			pos = mid;
+    		}
+    		else if(salary < em[mid].getBaseSalary()) {
+    			hight = mid -1;
+    		}
+    		else {
+    			low = mid + 1;
+    		}
+	    }
+		return em[pos];
+	}
 	
 }
