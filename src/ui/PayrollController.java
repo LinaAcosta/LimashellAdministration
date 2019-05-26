@@ -51,7 +51,7 @@ public class PayrollController {
     private TextField id;
 
     @FXML
-    void CalculateTotalPaidNet(ActionEvent event) throws IOException {
+    void CalculateTotalPaidNet(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	admi.loadEmployees();
     	double total = admi.calculatePayrollEmployees(admi.getFirst());
@@ -88,7 +88,7 @@ public class PayrollController {
     }
 
     @FXML
-    void searchEmployee(ActionEvent event) throws IOException, NotInformationException {
+    void searchEmployee(ActionEvent event) throws IOException, NotInformationException, ClassNotFoundException {
     	admi = new Administration();
     	admi.loadEmployees();
     	String ide;;

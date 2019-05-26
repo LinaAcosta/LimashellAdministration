@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.NextScreenController">
    <top>
       <Label prefHeight="44.0" prefWidth="331.0" text="WHAT DO YOU WANT TO DO?" textFill="#2bbaee" BorderPane.alignment="CENTER">
@@ -20,7 +19,8 @@
          <children>
             <Button layoutX="44.0" layoutY="31.0" mnemonicParsing="false" onAction="#calculatePayroll" prefHeight="46.0" prefWidth="133.0" text="Calculate payroll" />
             <Button layoutX="44.0" layoutY="119.0" mnemonicParsing="false" onAction="#listEmployees" prefHeight="52.0" prefWidth="129.0" text="See list of employees" />
-            <Button layoutX="358.0" layoutY="31.0" mnemonicParsing="false" onAction="#workArea" prefHeight="46.0" prefWidth="165.0" text="Organizate for work area" />
+            <Button layoutX="358.0" layoutY="31.0" mnemonicParsing="false" onAction="#workArea" prefHeight="46.0" prefWidth="199.0" text="Organizate for work area" />
+            <Button layoutX="358.0" layoutY="119.0" mnemonicParsing="false" onAction="#employee_month" prefHeight="53.0" prefWidth="197.0" text="Choose Employee of the month" />
          </children>
       </AnchorPane>
    </center>

@@ -13,6 +13,7 @@ public class NextScreenController {
 	private PayrollController p;
 	private ListEmployeesController l;
 	private WorkAreaController w;
+	private EmployeeMonthController e;
     @FXML
     void calculatePayroll(ActionEvent event) throws IOException{
     	p = new PayrollController();
@@ -39,6 +40,11 @@ public class NextScreenController {
     	stage.setResizable(false);
     	stage.setScene(new Scene(root1));  
     	stage.show();
+    }
+    @FXML
+    void employee_month(ActionEvent event) throws IOException {
+    	e = new EmployeeMonthController();
+    	e.seeOptions();
     }
 
 }

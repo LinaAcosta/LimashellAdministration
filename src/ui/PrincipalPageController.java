@@ -24,7 +24,7 @@ public class PrincipalPageController {
 
     private NextScreenController n;
     @FXML
-    void enter(ActionEvent event) throws IOException, NotInformationException, IncorrectInformationException {
+    void enter(ActionEvent event) throws IOException, NotInformationException, IncorrectInformationException, ClassNotFoundException {
     	admi = new Administration();
     	admi.loadManagerInformation();
     	String i;

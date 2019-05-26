@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="418.0" prefWidth="728.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.ListEmployeesController">
    <top>
       <AnchorPane prefHeight="73.0" prefWidth="600.0" BorderPane.alignment="CENTER">
@@ -65,7 +64,7 @@
             </AnchorPane>
          </top>
          <bottom>
-            <AnchorPane prefHeight="146.0" prefWidth="725.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="162.0" prefWidth="728.0" BorderPane.alignment="CENTER">
                <children>
                   <Label layoutX="14.0" layoutY="2.0" prefHeight="25.0" prefWidth="216.0" text="Search Employee by ID" textFill="#37aedd">
                      <font>
@@ -79,7 +78,7 @@
                         <Font name="Berlin Sans FB" size="16.0" />
                      </font>
                   </Button>
-                  <Button layoutX="14.0" layoutY="70.0" mnemonicParsing="false" onAction="#numberEmployees" text="Count Number Employees">
+                  <Button layoutX="13.0" layoutY="58.0" mnemonicParsing="false" onAction="#numberEmployees" text="Count Number Employees">
                      <font>
                         <Font name="Berlin Sans FB" size="16.0" />
                      </font>
@@ -95,7 +94,12 @@
                         <Font name="Berlin Sans FB" size="16.0" />
                      </font>
                   </Button>
-                  <Button layoutX="14.0" layoutY="101.0" mnemonicParsing="false" onAction="#numberHours" text="Count Number Hours ">
+                  <Button layoutX="14.0" layoutY="89.0" mnemonicParsing="false" onAction="#workedDays" prefHeight="31.0" prefWidth="195.0" text="Count Worked Days ">
+                     <font>
+                        <Font name="Berlin Sans FB" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button layoutX="14.0" layoutY="117.0" mnemonicParsing="false" onAction="#extraHours" prefHeight="31.0" prefWidth="195.0" text="Count Extra Hours ">
                      <font>
                         <Font name="Berlin Sans FB" size="16.0" />
                      </font>

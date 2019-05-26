@@ -12,7 +12,9 @@ import javafx.stage.Stage;
 public class WorkAreaController {
 	private AdmiAreaController a;
 	private ITAreaController i;
-
+	private PlantAreaController p;
+	private FinanceController f;
+	private AdverAreaController ad;
     @FXML
     void adminArea(ActionEvent event) throws IOException {
     	a = new AdmiAreaController();
@@ -20,12 +22,15 @@ public class WorkAreaController {
     }
 
     @FXML
-    void adverArea(ActionEvent event) {
-
+    void adverArea(ActionEvent event) throws IOException {
+    	ad = new AdverAreaController();
+    	ad.seeOptions();
     }
 
     @FXML
-    void financeArea(ActionEvent event) {
+    void financeArea(ActionEvent event) throws IOException {
+    	f = new FinanceController();
+    	f.seeOptions();
 
     }
 
@@ -37,7 +42,9 @@ public class WorkAreaController {
     }
 
     @FXML
-    void planArea(ActionEvent event) {
+    void planArea(ActionEvent event) throws IOException {
+    	p = new PlantAreaController();
+    	p.seeOptions();
 
     }
     public void seeOptions() throws IOException {

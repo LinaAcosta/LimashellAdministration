@@ -2,6 +2,7 @@ package ui;
 
 import java.io.IOException;
 
+import customExceptions.AreaNotFoundException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,9 +19,13 @@ public class ITAreaController {
 
     private Administration admi;
     @FXML
-    void seeIT(ActionEvent event) throws IOException {
+    void seeIT(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
-    	itArea.setText(admi.ITArea());
+    	try {
+    		itArea.setText(admi.ITArea());
+    	}catch(AreaNotFoundException e) {
+    		itArea.setText(e.getMessage());
+    	}
     }
     public void seeOptions() throws IOException {
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("itArea.fxml"));

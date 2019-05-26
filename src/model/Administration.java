@@ -2,13 +2,19 @@ package model;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
+import customExceptions.AreaNotFoundException;
 import customExceptions.IncorrectInformationException;
 import customExceptions.NotInformationException;
 
@@ -19,10 +25,13 @@ public class Administration{
 	private Employee first_admi;
 	private List<Employee> employees;
 	private Employee root_it;
+	private Employee employee_month;
 	public final static String PATH_FILE = "data/manager's_Info";
 	public final static String PATH_FILE2 = "data/employees";
-	public Administration() {
+	private final static String PATHSERIALIZABLE = "data/employeeMonth";
+	public Administration() throws FileNotFoundException, ClassNotFoundException, IOException {
 		employees = new ArrayList<>();
+		load();
 		
 	}
 	public Manager getManager() {
@@ -48,6 +57,39 @@ public class Administration{
 		}
 		reader.close();
 		br.close();
+	}
+	public void load() throws FileNotFoundException, IOException, ClassNotFoundException{
+		
+		File employee = new File(PATHSERIALIZABLE);
+		if(employee.exists()) {
+			ObjectInputStream myLoader = new ObjectInputStream(new FileInputStream(employee));
+			employee_month =  (Employee) myLoader.readObject();
+			myLoader.close();
+		}
+		else {
+			employee_month = null;
+		}
+	}
+	public void saveEmployeeMonth() throws FileNotFoundException, IOException {
+		
+		File employee = new File(PATHSERIALIZABLE);
+		
+		ObjectOutputStream mySavior = new ObjectOutputStream(new FileOutputStream(employee));
+		mySavior.writeObject(employee);
+		mySavior.close();
+	}
+	public Employee searchEmployeeMonth(int id) throws IOException {
+		loadEmployees();
+		Employee current = first;
+		while(current != null) {
+			if(id == current.getID()) {
+				employee_month = current;
+				current = null;
+			}else {
+				current = current.getNext();
+			}
+		}
+		return employee_month;
 	}
 	public void loadEmployees() throws IOException {
 		File archive = new File(PATH_FILE2);
@@ -270,29 +312,26 @@ public class Administration{
 	}
 	public Employee searchByID(int id) throws IOException {
 		loadEmployees();
-		int e = employees.size();
-		Employee[] em = new Employee[e];
-		for(int i = 0; i<em.length; i++) {
-			em[i] = employees.get(i);
-		}
-		boolean stop = false;
+		boolean found = false;
 		int pos = 0;
-    	int low = 0;
-    	int hight = em.length - 1;
-    	while(low <= hight && !stop) {
-    		int mid = (low+hight)/2;
-    		if(em[mid].getID() == id) {
-    			stop = true;
-    			pos = mid;
-    		}
-    		else if(id < em[mid].getID()) {
-    			hight = mid -1;
-    		}
-    		else {
-    			low = mid + 1;
-    		}
-	    }
-		return em[pos];
+		int low = 0;
+		int high = employees.size()-1;
+		
+		while(low<=high && !found) {
+			int mid = (low+high)/2;
+			if(employees.get(mid).getID() == id) {
+				pos = mid;
+				found = true;
+			}
+			else if(employees.get(mid).getID()>id) {
+				high = mid - 1;
+			}
+			else
+			{
+				low = mid + 1;
+			}
+		}
+		return employees.get(pos);
 	}
 	public int numberEmployees(Employee e) {
 		if(e.getNext()== null) {
@@ -330,9 +369,9 @@ public class Administration{
 	public Employee getFirstAdmi() {
 		return first_admi;
 	}
-	public String admiArea() throws IOException {
+	public String admiArea() throws IOException, AreaNotFoundException {
 		loadEmployees();
-		String message = "";
+		String message = null;
 		for(int i = 0; i<employees.size(); i++) {
 			if(employees.get(i).getWorkArea().equals("ADMINISTRATION") == true) {
 				if(first_admi == null) {
@@ -348,11 +387,87 @@ public class Administration{
 				}
 			}
 		}
-		return message;
+		if(message != null) {
+			return message;
+		}else {
+			throw new AreaNotFoundException("ADMINISTRATION");
+		}
 	}
-	public String ITArea() throws IOException {
+	public String PlantArea() throws IOException, AreaNotFoundException {
 		loadEmployees();
-		String message = "";
+		String message = null;
+		for(int i = 0; i<employees.size(); i++) {
+			if(employees.get(i).getWorkArea().equals("PLANT") == true) {
+				if(first_admi == null) {
+					first_admi = employees.get(i);
+					message += employees.get(i).getMessage2();
+				}else {
+					Employee current = first_admi;
+					while(current.getNext()!= null) {
+						current = current.getNext();
+					}
+					current.setNext(employees.get(i));
+					message += employees.get(i).getMessage2();
+				}
+			}
+		}
+		if(message != null) {
+			return message;
+		}else {
+			throw new AreaNotFoundException("PLANT");
+		}
+	}
+	public String FinanceArea() throws IOException, AreaNotFoundException {
+		loadEmployees();
+		String message = null;
+		for(int i = 0; i<employees.size(); i++) {
+			if(employees.get(i).getWorkArea().equals("FINANCE") == true) {
+				if(first_admi == null) {
+					first_admi = employees.get(i);
+					message += employees.get(i).getMessage2();
+				}else {
+					Employee current = first_admi;
+					while(current.getNext()!= null) {
+						current = current.getNext();
+					}
+					current.setNext(employees.get(i));
+					message += employees.get(i).getMessage2();
+				}
+			}
+		}
+		if(message != null) {
+			return message;
+		}else {
+			throw new AreaNotFoundException("PLANT");
+		}
+	}
+	public String adverArea() throws IOException, AreaNotFoundException {
+		loadEmployees();
+		String message = null;
+		for(int i = 0; i<employees.size(); i++) {
+			if(employees.get(i).getWorkArea().equals("ADVERTISING") == true) {
+				if(first_admi == null) {
+					first_admi = employees.get(i);
+					message += employees.get(i).getMessage2();
+				}else {
+					Employee current = first_admi;
+					while(current.getNext()!= null) {
+						current = current.getNext();
+					}
+					current.setNext(employees.get(i));
+					message += employees.get(i).getMessage2();
+				}
+			}
+		}
+		if(message != null) {
+			return message;
+		}else {
+			throw new AreaNotFoundException("PLANT");
+		}
+	}
+	public String ITArea() throws IOException, AreaNotFoundException {
+		loadEmployees();
+		String message = null;
 		for(int i = 0; i<employees.size(); i++) {
 			if(employees.get(i).getWorkArea().equals("IT") == true) {
 				if(root_it == null) {
@@ -383,13 +498,24 @@ public class Administration{
 				}
 			}
 		}
-		return message;
+		if(message != null) {
+			return message;
+		}else {
+			throw new AreaNotFoundException("PLANT");
+		}
 	}
 	public int calculateWorkedDays(Employee e) {
 		if(e.getNext()== null) {
 			return e.getWorkedDays();
 		}else {
 			return e.getWorkedDays() + calculateWorkedDays(e.getNext());
+		}
+	}
+	public int calculateExtraHoursWorked(Employee e) {
+		if(e.getNext()== null) {
+			return e.getExtraHours();
+		}else {
+			return e.getExtraHours() + calculateExtraHoursWorked(e.getNext());
 		}
 	}
 	

@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -28,7 +29,7 @@ public class ListEmployeesController {
     private Label infoEmployee;
 
     @FXML
-    void sortByArea(ActionEvent event) throws IOException {
+    void sortByArea(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	String message = "";
     	admi.loadEmployees();
@@ -40,7 +41,7 @@ public class ListEmployeesController {
     }
 
     @FXML
-    void sortByDays(ActionEvent event) throws IOException {
+    void sortByDays(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	String message = "";
     	admi.loadEmployees();
@@ -52,7 +53,7 @@ public class ListEmployeesController {
     }
 
     @FXML
-    void sortByHours(ActionEvent event) throws IOException {
+    void sortByHours(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	String message = "";
     	admi.loadEmployees();
@@ -64,7 +65,7 @@ public class ListEmployeesController {
     }
 
     @FXML
-    void sortByID(ActionEvent event) throws IOException {
+    void sortByID(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	String message = "";
     	admi.loadEmployees();
@@ -76,7 +77,7 @@ public class ListEmployeesController {
     }
 
     @FXML
-    void sortByLastName(ActionEvent event) throws IOException {
+    void sortByLastName(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	String message = "";
     	admi.loadEmployees();
@@ -89,7 +90,7 @@ public class ListEmployeesController {
     }
 
     @FXML
-    void sortByName(ActionEvent event) throws IOException {
+    void sortByName(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	String message = "";
     	admi.loadEmployees();
@@ -101,7 +102,7 @@ public class ListEmployeesController {
     }
 
     @FXML
-    void sortBySalary(ActionEvent event) throws IOException {
+    void sortBySalary(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	String message = "";
     	admi.loadEmployees();
@@ -122,27 +123,28 @@ public class ListEmployeesController {
     	stage.show();
     }
     @FXML
-    void searchEmployee(ActionEvent event) throws IOException {
+    void searchEmployee(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	if(id.getText().isEmpty() == true) {
     		infoEmployee.setText("Please enter the id");
     	}else {
-    		if(admi.searchByID(Integer.parseInt(id.getText())) == null) {
-    			infoEmployee.setText("The id does not exist");
-    		}else {
+    		if(admi.searchByID(Integer.parseInt(id.getText())) != null) {
     			infoEmployee.setText(admi.searchByID(Integer.parseInt(id.getText())).getMessage());
+    		}else {
+    			infoEmployee.setText("The id does not exist");
+    			
     		}
     	}
     }
     @FXML
-    void numberEmployees(ActionEvent event) throws IOException {
+    void numberEmployees(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	admi.loadEmployees();
     	double total = admi.numberEmployees(admi.getFirst());
     	infoEmployee.setText("Number of employees: " + total);
     }
     @FXML
-    void searchSalary(ActionEvent event) throws NumberFormatException, IOException {
+    void searchSalary(ActionEvent event) throws NumberFormatException, IOException, ClassNotFoundException {
     	admi = new Administration();
     	if(salary.getText().isEmpty() == true) {
     		infoEmployee.setText("Please enter the salary");
@@ -155,11 +157,18 @@ public class ListEmployeesController {
     	}
     }
     @FXML
-    void numberHours(ActionEvent event) throws IOException {
+    void workedDays(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	admi.loadEmployees();
     	double total = admi.calculateWorkedDays(admi.getFirst());
-    	infoEmployee.setText("Hours worked: " + total);
+    	infoEmployee.setText("Promedium days worked: " + total/10);
+    }
+    @FXML
+    void extraHours(ActionEvent event) throws FileNotFoundException, ClassNotFoundException, IOException {
+    	admi = new Administration();
+    	admi.loadEmployees();
+    	double total = admi.calculateExtraHoursWorked(admi.getFirst());
+    	infoEmployee.setText("Extra hours worked: " + total);
     }
 
 }

@@ -1,5 +1,6 @@
 package ui;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import customExceptions.AreaNotFoundException;
@@ -12,26 +13,26 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.Administration;
 
-public class AdmiAreaController {
+public class PlantAreaController {
 
     @FXML
-    private Label infoArea;
+    private Label info;
     private Administration admi;
+
     @FXML
-    void seeEmployees(ActionEvent event) throws IOException, ClassNotFoundException {
+    void seeEmployees(ActionEvent event) throws FileNotFoundException, ClassNotFoundException, IOException {
     	admi = new Administration();
     	try {
-    		infoArea.setText(admi.admiArea());
+    		info.setText(admi.PlantArea());
     	}catch(AreaNotFoundException e) {
-    		infoArea.setText(e.getMessage());
+    		info.setText(e.getMessage());
     	}
     }
-
     public void seeOptions() throws IOException {
-    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("admi.fxml"));
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("planArea.fxml"));
     	Parent root1 = (Parent) fxmlLoader.load();
     	Stage stage = new Stage();
-    	stage.setTitle("Admin Area");
+    	stage.setTitle("Plant Area");
     	stage.centerOnScreen();
     	stage.setResizable(false);
     	stage.setScene(new Scene(root1));  
