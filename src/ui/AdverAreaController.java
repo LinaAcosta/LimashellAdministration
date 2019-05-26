@@ -1,5 +1,9 @@
 package ui;
-
+/**
+ * This class manage the necessary attributes and methods to create and manage the Advertising Area User Interface.
+ * 
+ * @author Lina Acosta, Mishell Arboleda, Maria Ordoñez
+ */
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -20,6 +24,11 @@ public class AdverAreaController {
     private Administration admi;
 
     @FXML
+    /** this method allows to show the information of the employees in the advertising area. <br>
+	 * @param event the event that is caused by the user to trigger the method.
+	 * @throws IOException in the case of a problem reading or finding the file that recovers the employees.
+     * @throws ClassNotFoundException in the case of a problem finding the class to call a method.
+	 */
     void seeEmployees(ActionEvent event) throws FileNotFoundException, ClassNotFoundException, IOException {
     	admi = new Administration();
     	try {
@@ -29,6 +38,10 @@ public class AdverAreaController {
     	}
 
     }
+    /**
+     * This method handles a new event into the stage, showing the options of the advertising area
+     * @throws IOException if the fxml file can't be correctly loaded. 
+     */
     public void seeOptions() throws IOException {
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("adver.fxml"));
     	Parent root1 = (Parent) fxmlLoader.load();

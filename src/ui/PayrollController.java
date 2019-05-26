@@ -1,5 +1,9 @@
 package ui;
-
+/**
+ * This class manage the necessary attributes and methods to create and manage the payroll ui.
+ * 
+ * @author Lina Acosta, Mishell Arboleda, Maria Ordoñez
+ */
 import java.io.IOException;
 
 import customExceptions.NotInformationException;
@@ -51,6 +55,11 @@ public class PayrollController {
     private TextField id;
 
     @FXML
+    /** this method allows to calculate the total value to be paid to the employees by the company. <br>
+	 * @param event the event that is caused by the user to trigger the method.
+	 * @throws IOException in the case of a problem reading or finding the file that recovers the employees.
+     * @throws ClassNotFoundException in the case of a problem finding the class to call a method.
+	 */
     void CalculateTotalPaidNet(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	admi.loadEmployees();
@@ -59,6 +68,11 @@ public class PayrollController {
     }
 
     @FXML
+    /** this method allows to calculate the payroll of the employee searched. <br>
+	 * @param event the event that is caused by the user to trigger the method.
+	 * @throws IOException in the case of a problem reading or finding the file that recovers the employees.
+     * @throws ClassNotFoundException in the case of a problem finding the class to call a method.
+	 */
     void calculatePayroll(ActionEvent event) throws NotInformationException {
     	String ide;
     	if(id.getText().isEmpty() == true) {
@@ -88,6 +102,12 @@ public class PayrollController {
     }
 
     @FXML
+    /** this method allows to search an employee in the company. <br>
+	 * @param event the event that is caused by the user to trigger the method.
+	 * @throws IOException in the case of a problem reading or finding the file that recovers the employees.
+     * @throws ClassNotFoundException in the case of a problem finding the class to call a method.
+     * @throws NotInformationException in the case of the id of param is null.
+	 */
     void searchEmployee(ActionEvent event) throws IOException, NotInformationException, ClassNotFoundException {
     	admi = new Administration();
     	admi.loadEmployees();
@@ -107,6 +127,10 @@ public class PayrollController {
     		employeeInfo.setText(e.getMessage());
     	}
     }
+    /**
+     * This method handles a new event into the stage, showing the options of the payroll
+     * @throws IOException if the fxml file can't be correctly loaded. 
+     */
     public void seeOptions() throws IOException {
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("payroll.fxml"));
     	Parent root1 = (Parent) fxmlLoader.load();

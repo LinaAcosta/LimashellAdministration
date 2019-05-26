@@ -1,6 +1,11 @@
 package model;
-
+/**
+ * This class manage the necessary attributes and methods to manage the administrative platform
+ * 
+ * @author Lina Acosta, Mishell Arboleda, Maria Ordoñez
+ */
 import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -19,6 +24,7 @@ import customExceptions.IncorrectInformationException;
 import customExceptions.NotInformationException;
 
 public class Administration{
+	//Attributes & constants
 	private Manager manager;
 	private Employee root;
 	private Employee first;
@@ -29,20 +35,46 @@ public class Administration{
 	public final static String PATH_FILE = "data/manager's_Info";
 	public final static String PATH_FILE2 = "data/employees";
 	private final static String PATHSERIALIZABLE = "data/employeeMonth";
+	//Constructor method
+	/**
+	 * <b>Administration Constructor</b><br>
+	 * @throws IOException in the case of a problem reading or finding the file that recovers the employee of the month.
+     * @throws ClassNotFoundException in the case of a problem finding the class to call a method.
+	 * @throws FileNotFoundException in the case that the recovering file of the employee of the month does not exists.
+	 */
 	public Administration() throws FileNotFoundException, ClassNotFoundException, IOException {
 		employees = new ArrayList<>();
 		load();
 		
 	}
+	/**
+	 * This method returns the Manager that is created by reading and archive text "manager's_info" <br>
+	 * @return the Manager of the company
+	 */
 	public Manager getManager() {
 		return manager;
 	}
+	/**
+	 * This method returns the list of the employees that is created by reading and archive text "employees" <br>
+	 * @return the list of employees of the company
+	 */
 	public List<Employee> getEmployees(){
 		return employees;
 	}
+	/**
+	 * This method returns the first employee that is created by reading and archive text "employees" <br>
+	 * @return the first employee that is created
+	 */
 	public Employee getFirst() {
 		return first;
 	}
+	/**
+	 * This method allows to import and read a file that contains the respective information of the Manager of the company.<br>
+	 * <b>Pre:</b> The path of the file exists
+	 * <b>Pre:</b> The file exists<br>
+	 * <b>Pos:</b> The file had been readed and the information within it has been used to create the manager of the company<br>
+	 * @throws IOException in the case that the file cannot be imported or readed.
+	 */
 	public void loadManagerInformation() throws IOException {
 		File archive = new File(PATH_FILE);
 		FileReader reader = new FileReader(archive);
@@ -58,6 +90,12 @@ public class Administration{
 		reader.close();
 		br.close();
 	}
+	/**
+	 * This method allows to recover the employee of the month when the manager choose it<br>
+	 * @throws IOException in the case of a problem reading or finding the file that recovers the employee of the month.
+	 * @throws ClassNotFoundException in the case of a problem finding the class to call a method.
+	 * @throws FileNotFoundException in the case that the recovering file of the employee of the month does not exists.
+	 */
 	public void load() throws FileNotFoundException, IOException, ClassNotFoundException{
 		
 		File employee = new File(PATHSERIALIZABLE);
@@ -70,6 +108,11 @@ public class Administration{
 			employee_month = null;
 		}
 	}
+	/**
+	 * This method allows to save the employee of the month that is choosing for the manager of the company<br>
+	 * @throws IOException in the case of a problem reading or finding the file that recovers the employee of the month. 
+	 * @throws FileNotFoundException in the case that the recovering file of the employee of the month does not exists
+	 */
 	public void saveEmployeeMonth() throws FileNotFoundException, IOException {
 		
 		File employee = new File(PATHSERIALIZABLE);
@@ -78,6 +121,12 @@ public class Administration{
 		mySavior.writeObject(employee);
 		mySavior.close();
 	}
+	/**
+	 * This method searchs an id inside the linked list of employees of the company.<br>
+	 * @param id the id associated to the employee of the month
+	 * @return an Employee that represents the employee of the month
+	 * @throws IOException in the case of a problem reading or finding the file that recovers the employee of the month.
+	 */
 	public Employee searchEmployeeMonth(int id) throws IOException {
 		loadEmployees();
 		Employee current = first;
@@ -91,6 +140,13 @@ public class Administration{
 		}
 		return employee_month;
 	}
+	/**
+	 * This method allows to import and read a file that contains the respective information of the all the employees of the company.<br>
+	 * <b>Pre:</b> The path of the file exists
+	 * <b>Pre:</b> The file exists<br>
+	 * <b>Pos:</b> The file had been readed and the information within it has been used to create the employees of the company<br>
+	 * @throws IOException in the case that the file cannot be imported or readed.
+	 */
 	public void loadEmployees() throws IOException {
 		File archive = new File(PATH_FILE2);
 		FileReader reader = new FileReader(archive);
@@ -149,6 +205,14 @@ public class Administration{
 		br.close();
 		
 	}
+	/**
+	 * This method calculate the total value to be paid for all the employees of the company<br>
+	 * <b>Pre:</b> the linked list of employees exist.<br>
+	 * <b>Post:</b> the value to be paid is calculated. <br> 
+	 * @param a Employee that represents the first employee of the linked list
+	 * @return a double that represents the total value to be paid for all the employees
+	 * @throws IOException in the case that the file cannot be imported or readed.
+	 */
 	public double calculatePayrollEmployees(Employee e) throws IOException {
 		if(e.getNext()== null) {
 			return e.calculatePayroll();
@@ -156,6 +220,12 @@ public class Administration{
 			return e.calculatePayroll() + calculatePayrollEmployees(e.getNext());
 		}
 	}
+	/**
+	 * This method searchs an id inside the binary tree associated with the employees of the company.<br>
+	 * @param id the id associated to the employee that needs to be found
+	 * @return an Employee that represents the employee that was found
+	 * @throws NotInformationException in the case that the param not exists.
+	 */
 	public Employee searchEmployee(String ide) throws NotInformationException {
 		int id = Integer.parseInt(ide);
 		Employee a = null;
@@ -177,6 +247,14 @@ public class Administration{
 		}
 		return a;
 	}
+	/**
+	 * This method allows the entry of the manager to the administrative platform.<br>
+	 * @param id the id associated to the manager 
+	 * @param password the password associated to the manager 
+	 * @return an String that indicates whether or not can enter the system
+	 * @throws NotInformationException in the case that the param not exists.
+	 * @throws IncorrectInformationException in the case that the param are differents to the information of the manager.
+	 */
 	public String enterSystem(String i, String p) throws NotInformationException, IncorrectInformationException {
 		String message = "";
 		String id = ""; 
@@ -202,6 +280,12 @@ public class Administration{
 		return message;
 	    }
 	}
+	 /**
+     * This method sort the employees by its last name in an lexicographycal order.<br>
+     * <b>Pre:</b> the list of employees exist.<br>
+	 * <b>Post:</b> the list of employees is sort by last name. <br> 
+	 * @return a array that represents the employees of the company sorting by last name
+     */
 	public Employee[] sortByLastName() {
 		int e = employees.size();
 		Employee[] em = new Employee[e];
@@ -212,6 +296,12 @@ public class Administration{
 		Arrays.sort(em,employeeComparator);
 		return em;
 	}
+	/**
+     * This method sort the employees by name in an lexicographycal order.<br>
+     * <b>Pre:</b> the list of employees exist.<br>
+	 * <b>Post:</b> the list of employees is sort by name. <br> 
+	 * @return a array that represents the employees of the company sorting by name
+     */
 	public Employee[] sortByName() {
 		int e = employees.size();
 		Employee[] em = new Employee[e];
@@ -222,6 +312,12 @@ public class Administration{
 		Arrays.sort(em,employeeComparator);
 		return em;
 	}
+	/**
+     * This method sort the employees by id from lowest to highest.<br>
+     * <b>Pre:</b> the list of employees exist.<br>
+	 * <b>Post:</b> the list of employees is sort by id. <br> 
+	 * @return a array that represents the employees of the company sorting by id
+     */
 	public Employee[] sortByID() {
 		int e = employees.size();
 		Employee[] em = new Employee[e];
@@ -248,6 +344,12 @@ public class Administration{
         }
         return em;
     }
+	/**
+     * This method sort the employees by extra hours worked from lowest to highest.<br>
+     * <b>Pre:</b> the list of employees exist.<br>
+	 * <b>Post:</b> the list of employees is sort by extra hours worked. <br> 
+	 * @return a array that represents the employees of the company sorting by extra hours worked
+     */
 	public Employee[] sortByHours() {
 		int e = employees.size();
 		Employee[] em = new Employee[e];
@@ -265,6 +367,12 @@ public class Administration{
 		return em;
    	   
 	}
+	/**
+     * This method sort the employees by salary from lowest to highest.<br>
+     * <b>Pre:</b> the list of employees exist.<br>
+	 * <b>Post:</b> the list of employees is sort by salary. <br> 
+	 * @return a array that represents the employees of the company sorting by salary
+     */
 	public Employee[] sortBySalary() {
 		int e = employees.size();
 		Employee[] em = new Employee[e];
@@ -283,6 +391,12 @@ public class Administration{
         }  
 		return em;
 	}
+	/**
+     * This method sort the employees by area's work in an lexicographycal order.<br>
+     * <b>Pre:</b> the list of employees exist.<br>
+	 * <b>Post:</b> the list of employees is sort by area's work. <br> 
+	 * @return a array that represents the employees of the company sorting by area's work
+     */
 	public Employee[] sortByArea() {
 		int e = employees.size();
 		Employee[] em = new Employee[e];
@@ -292,6 +406,12 @@ public class Administration{
 		Arrays.sort(em);
 		return em;
 	}
+	/**
+     * This method sort the employees by days worked from lowest to highest.<br>
+     * <b>Pre:</b> the list of employees exist.<br>
+	 * <b>Post:</b> the list of employees is sort by days worked. <br> 
+	 * @return a array that represents the employees of the company sorting by days worked
+     */
 	public Employee[] sortByDays() {
 		int e = employees.size();
 		Employee[] em = new Employee[e];
@@ -310,6 +430,13 @@ public class Administration{
         }  
 		return em;
 	}
+
+	/**
+	 * This method search a employee of the company using Binary Searching
+	 * @param id the id of the employee that needs be found
+	 * @return a Employee that represents the employee found
+	 * @throws IOException in the case that the file cannot be imported or readed.
+	 */
 	public Employee searchByID(int id) throws IOException {
 		loadEmployees();
 		boolean found = false;
@@ -333,6 +460,13 @@ public class Administration{
 		}
 		return employees.get(pos);
 	}
+	/**
+	 * This method calculate the total number of employees that has the company<br>
+	 * <b>Pre:</b> the linked list of employees exist.<br>
+	 * <b>Post:</b> the number of employees is calculated. <br> 
+	 * @param a Employee that represents the first employee of the linked list
+	 * @return a int that represents the total number of employees 
+	 */
 	public int numberEmployees(Employee e) {
 		if(e.getNext()== null) {
 			return 1;
@@ -340,6 +474,12 @@ public class Administration{
 			return 1 + numberEmployees(e.getNext());
 		}
 	}
+	/**
+	 * This method search a employee of the company using Binary Searching
+	 * @param salary the salary of the employee that needs be found
+	 * @return a Employee that represents the employee found
+	 * @throws IOException in the case that the file cannot be imported or readed.
+	 */
 	public Employee searchSalary(double salary) throws IOException {
 		loadEmployees();
 		int e = employees.size();
@@ -366,9 +506,21 @@ public class Administration{
 	    }
 		return em[pos];
 	}
+	/**
+	 * This method returns the first employee of the administrative area
+	 * @return an Employee that represents the first employee created of the administrative area
+	 */
 	public Employee getFirstAdmi() {
 		return first_admi;
 	}
+	/**
+	 * this method allows to return a message that contains the information of the employees that work in the administrative area
+	 * <b>Pre:</b> the list of employees exists<br>
+	 * <b>Pre:</b> the first employee of the administrative area exists<br>
+	 * @return  a String that represents information of the employees that work in the administrative area
+	 * @throws IOException in the case that the file cannot be imported or readed.
+	 * @throws AreaNotFoundException in the case that the area was not found
+	 */
 	public String admiArea() throws IOException, AreaNotFoundException {
 		loadEmployees();
 		String message = null;
@@ -393,6 +545,14 @@ public class Administration{
 			throw new AreaNotFoundException("ADMINISTRATION");
 		}
 	}
+	/**
+	 * this method allows to return a message that contains the information of the employees that work in the plant area
+	 * <b>Pre:</b> the list of employees exists<br>
+	 * <b>Pre:</b> the first employee of the plant area exists<br>
+	 * @return  a String that represents information of the employees that work in the plant area
+	 * @throws IOException in the case that the file cannot be imported or readed.
+	 * @throws AreaNotFoundException in the case that the area was not found
+	 */
 	public String PlantArea() throws IOException, AreaNotFoundException {
 		loadEmployees();
 		String message = null;
@@ -417,6 +577,14 @@ public class Administration{
 			throw new AreaNotFoundException("PLANT");
 		}
 	}
+	/**
+	 * this method allows to return a message that contains the information of the employees that work in the finance area
+	 * <b>Pre:</b> the list of employees exists<br>
+	 * <b>Pre:</b> the first employee of the finance area exists<br>
+	 * @return  a String that represents information of the employees that work in the finance area
+	 * @throws IOException in the case that the file cannot be imported or readed.
+	 * @throws AreaNotFoundException in the case that the area was not found
+	 */
 	public String FinanceArea() throws IOException, AreaNotFoundException {
 		loadEmployees();
 		String message = null;
@@ -441,6 +609,14 @@ public class Administration{
 			throw new AreaNotFoundException("PLANT");
 		}
 	}
+	/**
+	 * this method allows to return a message that contains the information of the employees that work in the adversiting area
+	 * <b>Pre:</b> the list of employees exists<br>
+	 * <b>Pre:</b> the first employee of the adversiting area exists<br>
+	 * @return  a String that represents information of the employees that work in the adversiting area
+	 * @throws IOException in the case that the file cannot be imported or readed.
+	 * @throws AreaNotFoundException in the case that the area was not found
+	 */
 	public String adverArea() throws IOException, AreaNotFoundException {
 		loadEmployees();
 		String message = null;
@@ -465,6 +641,14 @@ public class Administration{
 			throw new AreaNotFoundException("PLANT");
 		}
 	}
+	/**
+	 * this method allows to return a message that contains the information of the employees that work in the IT area
+	 * <b>Pre:</b> the list of employees exists<br>
+	 * <b>Pre:</b> the root employee of the IT area exists<br>
+	 * @return  a String that represents information of the employees that work in the IT area
+	 * @throws IOException in the case that the file cannot be imported or readed.
+	 * @throws AreaNotFoundException in the case that the area was not found
+	 */
 	public String ITArea() throws IOException, AreaNotFoundException {
 		loadEmployees();
 		String message = null;
@@ -504,6 +688,13 @@ public class Administration{
 			throw new AreaNotFoundException("PLANT");
 		}
 	}
+	/**
+	 * This method calculate the total days worked by the employees<br>
+	 * <b>Pre:</b> the linked list of employees exist.<br>
+	 * <b>Post:</b> the worked days is calculated. <br> 
+	 * @param a Employee that represents the first employee of the linked list
+	 * @return a int that represents the total days worked by the employees 
+	 */
 	public int calculateWorkedDays(Employee e) {
 		if(e.getNext()== null) {
 			return e.getWorkedDays();
@@ -511,6 +702,13 @@ public class Administration{
 			return e.getWorkedDays() + calculateWorkedDays(e.getNext());
 		}
 	}
+	/**
+	 * This method calculate the total extra hours worked by the employees<br>
+	 * <b>Pre:</b> the linked list of employees exist.<br>
+	 * <b>Post:</b> the total extra hours worked is calculated. <br> 
+	 * @param a Employee that represents the first employee of the linked list
+	 * @return a int that represents the total extra hours worked by the employees 
+	 */
 	public int calculateExtraHoursWorked(Employee e) {
 		if(e.getNext()== null) {
 			return e.getExtraHours();
