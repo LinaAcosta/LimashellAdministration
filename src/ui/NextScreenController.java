@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class NextScreenController {
 	private PayrollController p;
 	private ListEmployeesController l;
-
+	private WorkAreaController w;
     @FXML
     void calculatePayroll(ActionEvent event) throws IOException{
     	p = new PayrollController();
@@ -24,6 +24,11 @@ public class NextScreenController {
     	l = new ListEmployeesController();
     	l.seeOptions();
 
+    }
+    @FXML
+    void workArea(ActionEvent event) throws IOException {
+    	w = new WorkAreaController();
+    	w.seeOptions();
     }
     public void seeOptions() throws IOException {
     	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("next.fxml"));

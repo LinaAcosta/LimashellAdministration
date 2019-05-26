@@ -16,6 +16,7 @@ public class Administration{
 	private Manager manager;
 	private Employee root;
 	private Employee first;
+	private Employee first_admi;
 	private List<Employee> employees;
 	public final static String PATH_FILE = "data/manager's_Info";
 	public final static String PATH_FILE2 = "data/employees";
@@ -325,5 +326,29 @@ public class Administration{
 	    }
 		return em[pos];
 	}
+	public Employee getFirstAdmi() {
+		return first_admi;
+	}
+	public String admiArea() throws IOException {
+		loadEmployees();
+		String message = "";
+		for(int i = 0; i<employees.size(); i++) {
+			if(employees.get(i).getWorkArea().equals("ADMINISTRATION") == true) {
+				if(first_admi == null) {
+					first_admi = employees.get(i);
+					message += employees.get(i).getMessage2();
+				}else {
+					Employee current = first_admi;
+					while(current.getNext()!= null) {
+						current = current.getNext();
+					}
+					current.setNext(employees.get(i));
+					message += employees.get(i).getMessage2();
+				}
+			}
+		}
+		return message;
+	}
+	
 	
 }

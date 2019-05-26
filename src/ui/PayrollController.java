@@ -53,6 +53,7 @@ public class PayrollController {
     @FXML
     void CalculateTotalPaidNet(ActionEvent event) throws IOException {
     	admi = new Administration();
+    	admi.loadEmployees();
     	double total = admi.calculatePayrollEmployees(admi.getFirst());
     	totalPaidNet.setText("The total value to be paid by all workers is: " + total);
     }
