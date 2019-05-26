@@ -18,6 +18,7 @@ public class Administration{
 	private Employee first;
 	private Employee first_admi;
 	private List<Employee> employees;
+	private Employee root_it;
 	public final static String PATH_FILE = "data/manager's_Info";
 	public final static String PATH_FILE2 = "data/employees";
 	public Administration() {
@@ -349,6 +350,47 @@ public class Administration{
 		}
 		return message;
 	}
-	
+	public String ITArea() throws IOException {
+		loadEmployees();
+		String message = "";
+		for(int i = 0; i<employees.size(); i++) {
+			if(employees.get(i).getWorkArea().equals("IT") == true) {
+				if(root_it == null) {
+					root_it = employees.get(i);
+					message += employees.get(i).getMessage2();
+				}else {
+					Employee current = root_it;
+					boolean added = false;
+					while(!added) {
+						if(employees.get(i).getID()>root_it.getID()) {
+							if(current.getRight() == null) {
+								current.setRight(employees.get(i));
+								message += employees.get(i).getMessage2();
+								added = true;
+							}else {
+								current = current.getRight();
+							}
+						}else {
+							if(current.getLeft()== null) {
+								current.setLeft(employees.get(i));
+								message += employees.get(i).getMessage2();
+								added = true;
+							}else {
+								current = current.getLeft();
+							}
+						}
+					}
+				}
+			}
+		}
+		return message;
+	}
+	public int calculateWorkedDays(Employee e) {
+		if(e.getNext()== null) {
+			return e.getWorkedDays();
+		}else {
+			return e.getWorkedDays() + calculateWorkedDays(e.getNext());
+		}
+	}
 	
 }

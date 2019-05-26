@@ -154,6 +154,13 @@ public class ListEmployeesController {
     		}
     	}
     }
+    @FXML
+    void numberHours(ActionEvent event) throws IOException {
+    	admi = new Administration();
+    	admi.loadEmployees();
+    	double total = admi.calculateWorkedDays(admi.getFirst());
+    	infoEmployee.setText("Hours worked: " + total);
+    }
 
 }
 

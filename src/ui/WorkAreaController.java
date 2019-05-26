@@ -11,12 +11,12 @@ import javafx.stage.Stage;
 
 public class WorkAreaController {
 	private AdmiAreaController a;
+	private ITAreaController i;
 
     @FXML
     void adminArea(ActionEvent event) throws IOException {
     	a = new AdmiAreaController();
     	a.seeOptions();
-
     }
 
     @FXML
@@ -30,7 +30,9 @@ public class WorkAreaController {
     }
 
     @FXML
-    void itArea(ActionEvent event) {
+    void itArea(ActionEvent event) throws IOException {
+    	i = new ITAreaController();
+    	i.seeOptions();
 
     }
 
