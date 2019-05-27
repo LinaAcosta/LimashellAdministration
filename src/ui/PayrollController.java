@@ -53,6 +53,7 @@ public class PayrollController {
     
     @FXML
     private TextField id;
+    public final static String PATH_FILE2 = "data/employees";
 
     @FXML
     /** this method allows to calculate the total value to be paid to the employees by the company. <br>
@@ -62,7 +63,7 @@ public class PayrollController {
 	 */
     void CalculateTotalPaidNet(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
-    	admi.loadEmployees();
+    	admi.loadEmployees(PATH_FILE2);
     	double total = admi.calculatePayrollEmployees(admi.getFirst());
     	totalPaidNet.setText("The total value to be paid by all workers is: " + total);
     }
@@ -110,7 +111,7 @@ public class PayrollController {
 	 */
     void searchEmployee(ActionEvent event) throws IOException, NotInformationException, ClassNotFoundException {
     	admi = new Administration();
-    	admi.loadEmployees();
+    	admi.loadEmployees(PATH_FILE2);
     	String ide;;
     	if(id.getText().isEmpty() == true) {
     		ide = null;

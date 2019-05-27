@@ -27,6 +27,7 @@ public class PrincipalPageController {
     private Label message;
 
     private NextScreenController n;
+    public final static String PATH_FILE = "data/manager's_Info";
     @FXML
     /** this method allows the entry of the manager to the administrative platform. <br>
 	 * @param event the event that is caused by the user to trigger the method.
@@ -37,7 +38,7 @@ public class PrincipalPageController {
 	 */
     void enter(ActionEvent event) throws IOException, NotInformationException, IncorrectInformationException, ClassNotFoundException {
     	admi = new Administration();
-    	admi.loadManagerInformation();
+    	admi.loadManagerInformation(PATH_FILE);
     	String i;
     	String p;
     	if(id.getText().isEmpty() == true) {

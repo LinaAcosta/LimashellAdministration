@@ -31,6 +31,7 @@ public class ListEmployeesController {
 
     @FXML
     private Label infoEmployee;
+    public final static String PATH_FILE2 = "data/employees";
 
     @FXML
     /** this method allows to show the information of the employees sorting for work's area. <br>
@@ -41,7 +42,7 @@ public class ListEmployeesController {
     void sortByArea(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	String message = "";
-    	admi.loadEmployees();
+    	admi.loadEmployees(PATH_FILE2);
     	Employee[] em = admi.sortByArea();
     	for(int i = 0; i < em.length; i++) {
     		message = message + em[i].getMessage2();
@@ -58,7 +59,7 @@ public class ListEmployeesController {
     void sortByDays(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	String message = "";
-    	admi.loadEmployees();
+    	admi.loadEmployees(PATH_FILE2);
     	Employee[] em = admi.sortByDays();
     	for(int i = 0; i < em.length; i++) {
     		message = message + em[i].getMessage2();
@@ -75,7 +76,7 @@ public class ListEmployeesController {
     void sortByHours(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	String message = "";
-    	admi.loadEmployees();
+    	admi.loadEmployees(PATH_FILE2);
     	Employee[] em = admi.sortByHours();
     	for(int i = 0; i < em.length; i++) {
     		message = message + em[i].getMessage2();
@@ -92,7 +93,7 @@ public class ListEmployeesController {
     void sortByID(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	String message = "";
-    	admi.loadEmployees();
+    	admi.loadEmployees(PATH_FILE2);
     	Employee[] em = admi.sortByID();
     	for(int i = 0; i < em.length; i++) {
     		message = message + em[i].getMessage2();
@@ -109,7 +110,7 @@ public class ListEmployeesController {
     void sortByLastName(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	String message = "";
-    	admi.loadEmployees();
+    	admi.loadEmployees(PATH_FILE2);
     	Employee[] em = admi.sortByLastName();
     	for(int i = 0; i < em.length; i++) {
     		message = message + em[i].getMessage2();
@@ -127,7 +128,7 @@ public class ListEmployeesController {
     void sortByName(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	String message = "";
-    	admi.loadEmployees();
+    	admi.loadEmployees(PATH_FILE2);
     	Employee[] em = admi.sortByName();
     	for(int i = 0; i < em.length; i++) {
     		message = message + em[i].getMessage2();
@@ -144,7 +145,7 @@ public class ListEmployeesController {
     void sortBySalary(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
     	String message = "";
-    	admi.loadEmployees();
+    	admi.loadEmployees(PATH_FILE2);
     	Employee[] em = admi.sortBySalary();
     	for(int i = 0; i < em.length; i++) {
     		message = message + em[i].getMessage2();
@@ -192,7 +193,7 @@ public class ListEmployeesController {
 	 */
     void numberEmployees(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
-    	admi.loadEmployees();
+    	admi.loadEmployees(PATH_FILE2);
     	double total = admi.numberEmployees(admi.getFirst());
     	infoEmployee.setText("Number of employees: " + total);
     }
@@ -222,7 +223,7 @@ public class ListEmployeesController {
 	 */
     void workedDays(ActionEvent event) throws IOException, ClassNotFoundException {
     	admi = new Administration();
-    	admi.loadEmployees();
+    	admi.loadEmployees(PATH_FILE2);
     	double total = admi.calculateWorkedDays(admi.getFirst());
     	infoEmployee.setText("Promedium days worked: " + total/10);
     }
@@ -234,7 +235,7 @@ public class ListEmployeesController {
 	 */
     void extraHours(ActionEvent event) throws FileNotFoundException, ClassNotFoundException, IOException {
     	admi = new Administration();
-    	admi.loadEmployees();
+    	admi.loadEmployees(PATH_FILE2);
     	double total = admi.calculateExtraHoursWorked(admi.getFirst());
     	infoEmployee.setText("Extra hours worked: " + total);
     }

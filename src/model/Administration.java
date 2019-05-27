@@ -47,6 +47,24 @@ public class Administration{
 		load();
 		
 	}
+	public void setManager(Manager m) {
+		manager = m;
+	}
+	public void setFirst(Employee e) {
+		first = e;
+	}
+	public void setRoot(Employee e) {
+		root = e;
+	}
+	public Employee getRoot() {
+		return root;
+	}
+	public void setEmployeeMonth(Employee e) {
+		employee_month = e;
+	}
+	public Employee getEmployeeMonth() {
+		return employee_month;
+	}
 	/**
 	 * This method returns the Manager that is created by reading and archive text "manager's_info" <br>
 	 * @return the Manager of the company
@@ -75,8 +93,8 @@ public class Administration{
 	 * <b>Pos:</b> The file had been readed and the information within it has been used to create the manager of the company<br>
 	 * @throws IOException in the case that the file cannot be imported or readed.
 	 */
-	public void loadManagerInformation() throws IOException {
-		File archive = new File(PATH_FILE);
+	public void loadManagerInformation(String path) throws IOException {
+		File archive = new File(path);
 		FileReader reader = new FileReader(archive);
 		BufferedReader br = new BufferedReader(reader);
 		String ln = br.readLine();
@@ -128,7 +146,7 @@ public class Administration{
 	 * @throws IOException in the case of a problem reading or finding the file that recovers the employee of the month.
 	 */
 	public Employee searchEmployeeMonth(int id) throws IOException {
-		loadEmployees();
+		loadEmployees(PATH_FILE2);
 		Employee current = first;
 		while(current != null) {
 			if(id == current.getID()) {
@@ -147,8 +165,8 @@ public class Administration{
 	 * <b>Pos:</b> The file had been readed and the information within it has been used to create the employees of the company<br>
 	 * @throws IOException in the case that the file cannot be imported or readed.
 	 */
-	public void loadEmployees() throws IOException {
-		File archive = new File(PATH_FILE2);
+	public void loadEmployees(String path) throws IOException {
+		File archive = new File(path);
 		FileReader reader = new FileReader(archive);
 		BufferedReader br = new BufferedReader(reader);
 		String ln = br.readLine();
@@ -438,7 +456,7 @@ public class Administration{
 	 * @throws IOException in the case that the file cannot be imported or readed.
 	 */
 	public Employee searchByID(int id) throws IOException {
-		loadEmployees();
+		loadEmployees(PATH_FILE2);
 		boolean found = false;
 		int pos = 0;
 		int low = 0;
@@ -481,7 +499,7 @@ public class Administration{
 	 * @throws IOException in the case that the file cannot be imported or readed.
 	 */
 	public Employee searchSalary(double salary) throws IOException {
-		loadEmployees();
+		loadEmployees(PATH_FILE2);
 		int e = employees.size();
 		Employee[] em = new Employee[e];
 		for(int i = 0; i<em.length; i++) {
@@ -522,8 +540,8 @@ public class Administration{
 	 * @throws AreaNotFoundException in the case that the area was not found
 	 */
 	public String admiArea() throws IOException, AreaNotFoundException {
-		loadEmployees();
-		String message = null;
+		loadEmployees(PATH_FILE2);
+		String message = "";
 		for(int i = 0; i<employees.size(); i++) {
 			if(employees.get(i).getWorkArea().equals("ADMINISTRATION") == true) {
 				if(first_admi == null) {
@@ -539,7 +557,7 @@ public class Administration{
 				}
 			}
 		}
-		if(message != null) {
+		if(message != "") {
 			return message;
 		}else {
 			throw new AreaNotFoundException("ADMINISTRATION");
@@ -554,8 +572,8 @@ public class Administration{
 	 * @throws AreaNotFoundException in the case that the area was not found
 	 */
 	public String PlantArea() throws IOException, AreaNotFoundException {
-		loadEmployees();
-		String message = null;
+		loadEmployees(PATH_FILE2);
+		String message = "";
 		for(int i = 0; i<employees.size(); i++) {
 			if(employees.get(i).getWorkArea().equals("PLANT") == true) {
 				if(first_admi == null) {
@@ -571,7 +589,7 @@ public class Administration{
 				}
 			}
 		}
-		if(message != null) {
+		if(message != "") {
 			return message;
 		}else {
 			throw new AreaNotFoundException("PLANT");
@@ -586,8 +604,8 @@ public class Administration{
 	 * @throws AreaNotFoundException in the case that the area was not found
 	 */
 	public String FinanceArea() throws IOException, AreaNotFoundException {
-		loadEmployees();
-		String message = null;
+		loadEmployees(PATH_FILE2);
+		String message = "";
 		for(int i = 0; i<employees.size(); i++) {
 			if(employees.get(i).getWorkArea().equals("FINANCE") == true) {
 				if(first_admi == null) {
@@ -603,7 +621,7 @@ public class Administration{
 				}
 			}
 		}
-		if(message != null) {
+		if(message != "") {
 			return message;
 		}else {
 			throw new AreaNotFoundException("PLANT");
@@ -618,8 +636,8 @@ public class Administration{
 	 * @throws AreaNotFoundException in the case that the area was not found
 	 */
 	public String adverArea() throws IOException, AreaNotFoundException {
-		loadEmployees();
-		String message = null;
+		loadEmployees(PATH_FILE2);
+		String message = "";
 		for(int i = 0; i<employees.size(); i++) {
 			if(employees.get(i).getWorkArea().equals("ADVERTISING") == true) {
 				if(first_admi == null) {
@@ -635,7 +653,7 @@ public class Administration{
 				}
 			}
 		}
-		if(message != null) {
+		if(message != "") {
 			return message;
 		}else {
 			throw new AreaNotFoundException("PLANT");
@@ -650,8 +668,8 @@ public class Administration{
 	 * @throws AreaNotFoundException in the case that the area was not found
 	 */
 	public String ITArea() throws IOException, AreaNotFoundException {
-		loadEmployees();
-		String message = null;
+		loadEmployees(PATH_FILE2);
+		String message = "";
 		for(int i = 0; i<employees.size(); i++) {
 			if(employees.get(i).getWorkArea().equals("IT") == true) {
 				if(root_it == null) {
@@ -682,7 +700,7 @@ public class Administration{
 				}
 			}
 		}
-		if(message != null) {
+		if(message != "") {
 			return message;
 		}else {
 			throw new AreaNotFoundException("PLANT");
