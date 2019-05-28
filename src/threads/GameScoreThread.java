@@ -24,7 +24,7 @@ public class GameScoreThread extends Thread{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			} catch (NumberFormatException e) {
-				e.printStackTrace();
+			    System.out.print(" ");
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
