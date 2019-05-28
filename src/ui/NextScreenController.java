@@ -18,6 +18,7 @@ public class NextScreenController {
 	private ListEmployeesController l;
 	private WorkAreaController w;
 	private EmployeeMonthController e;
+	private GameController g;
     @FXML
     /** this method allows to show the screen to calculate payroll. <br>
 	 * @param event the event that is caused by the user to trigger the method.
@@ -69,6 +70,11 @@ public class NextScreenController {
     void employee_month(ActionEvent event) throws IOException {
     	e = new EmployeeMonthController();
     	e.seeOptions();
+    }
+    @FXML
+    void game(ActionEvent event) throws IOException {
+    	g = new GameController();
+    	g.seeOptions();
     }
 
 }

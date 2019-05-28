@@ -21,6 +21,7 @@
             <Button layoutX="44.0" layoutY="119.0" mnemonicParsing="false" onAction="#listEmployees" prefHeight="52.0" prefWidth="129.0" text="See list of employees" />
             <Button layoutX="358.0" layoutY="31.0" mnemonicParsing="false" onAction="#workArea" prefHeight="46.0" prefWidth="199.0" text="Organizate for work area" />
             <Button layoutX="358.0" layoutY="119.0" mnemonicParsing="false" onAction="#employee_month" prefHeight="53.0" prefWidth="197.0" text="Choose Employee of the month" />
+            <Button layoutX="44.0" layoutY="222.0" mnemonicParsing="false" onAction="#game" prefHeight="51.0" prefWidth="125.0" text="Game" />
          </children>
       </AnchorPane>
    </center>
