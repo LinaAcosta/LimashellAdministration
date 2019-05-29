@@ -38,6 +38,8 @@ public class BalanceController {
 	
 	@FXML
     private BorderPane borderPane;
+	@FXML
+    private Label label;
 
     @FXML
     private ImageView logo;
@@ -354,7 +356,7 @@ public class BalanceController {
 
     @FXML
     public void testBalance(ActionEvent event) {
-    	//Label label = new Label(""+company.testBalance());
+    	
     }
     /**
      * This method handles a new event into the stage, showing the options of the balance

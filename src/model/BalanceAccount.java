@@ -18,7 +18,7 @@ public interface BalanceAccount {
 		String balance;
 		if(debit > credit) {
 			balance = DEBIT_BALANCE;
-		}else if(credit > debit) {
+		}else if(debit < credit) {
 			balance = CREDIT_BALANCE;
 		}else {
 			balance = ZERO_BALANCE;
