@@ -18,6 +18,7 @@ public class NextScreenController {
 	private ListEmployeesController l;
 	private WorkAreaController w;
 	private EmployeeMonthController e;
+	private BalanceController b;
 	private GameController g;
     @FXML
     /** this method allows to show the screen to calculate payroll. <br>
@@ -72,9 +73,22 @@ public class NextScreenController {
     	e.seeOptions();
     }
     @FXML
+    /** this method allows to show the game's screen. <br>
+	 * @param event the event that is caused by the user to trigger the method.
+	 * @throws IOException in the case of a problem reading or finding the file that recovers the score.
+	 */
     void game(ActionEvent event) throws IOException {
     	g = new GameController();
     	g.seeOptions();
+    }
+    @FXML
+    /** this method allows to show the balance's screen. <br>
+	 * @param event the event that is caused by the user to trigger the method.
+	 * @throws IOException in the case of a problem reading or finding the different files.
+	 */
+    void balance(ActionEvent event) throws IOException {
+    	b = new BalanceController();
+    	b.seeOptions();
     }
 
 }

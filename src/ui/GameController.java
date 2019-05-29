@@ -74,9 +74,6 @@ public class GameController {
     	SaveGameThread sv = new SaveGameThread(game);
     	sv.start();
     }
-    public Label getLabel() {
-    	return score;
-    }
     /** this method allows to show the image selected by the usuary. <br>
 	 * @param event the event that is caused by the user to trigger the method.
 	 * @throws IOException in the case of a problem reading or finding the file that recovers the image.
